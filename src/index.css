@@ -1,3 +1,8 @@
+/* Using border-box across */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,9 +11,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #eee;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 1rem 0;
+  color: #222;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+/* Default font-size to scale other elements from for tablet/mobile devices */
+@media (max-width: 960px) {
+  html {
+    font-size: 14px;
+  }
 }

@@ -1,0 +1,21 @@
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  min-width: 180px;
+  width: 25%;
+}
+
+.sort-wrapper .label {
+  padding-right: 0.5rem;
+  width: 90px;
+  text-align: right;
+}
+
+.sort-wrapper .select-box select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #444;
+  box-shadow: 0 2px 4px #f3f3f3;
+  width: 100%;
+}
