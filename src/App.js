@@ -1,6 +1,6 @@
 import React from 'react';
 import Feed from './containers/Feed';
-import './App.css';
+import './App.scss';
 
 const App = () => {
   return (

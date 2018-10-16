@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './FeedTable.css';
+import './FeedTable.scss';
 
 const FeedTable = ({ data }) => {
   return <div className="scroll-overlay">

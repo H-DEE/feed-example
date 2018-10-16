@@ -1,0 +1,40 @@
+@import '../../assets/styles/core.scss';
+
+.feed-container {
+   h1 {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    
+    @include media(mobile down) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  h2 {
+    margin-top: 2rem;
+    padding: 0 1.75rem;
+
+    @include media(mobile down) {
+      margin-top: 2rem;
+      padding: 0 1rem;
+    }
+  }
+
+  .filter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.75rem 0.5rem;
+
+    @include media(mobile down) {
+      padding: 0 1rem 0.5rem;
+    }
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+  }
+}

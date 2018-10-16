@@ -1,0 +1,12 @@
+@import './assets/styles/core.scss';
+
+.app-container {
+  max-width: $container-max-width;
+  background: $app-bg-container;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+
+  @include media(large up) {
+    margin: 0 auto;
+  }
+}

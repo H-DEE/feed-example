@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./Sort.css";
+import "./Sort.scss";
 
 const Sort = ({ sort, sortOptions, setSortConfig }) => {
   return (

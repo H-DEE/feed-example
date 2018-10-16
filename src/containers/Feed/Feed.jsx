@@ -16,7 +16,7 @@ import {
   customSort,
 } from "../../utils";
 import CardsData from '../../static/mock_data.json';
-import './Feed.css';
+import './Feed.scss';
 
 class Feed extends Component {
   state = {
