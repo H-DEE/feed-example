@@ -17,7 +17,7 @@ export const fetchFromLocalStorage = () => {
 
 /**
  * Sort a list of objects based on the sort type selected.
- * Sorts by name as default option if no/incorrect sort filter0000000000 specified.
+ * Sorts by name as default option if no/incorrect sort filter specified.
  * @param arr - List of objects to sort
  * @param sortBy - Filter to sort the array: name, name_r (Reverse), date, date_r (Reverse)
  * @returns arr - Sorted list of objects
@@ -46,3 +46,25 @@ export const customSort = (arr, sortBy) => {
     }
   });
 };
+
+/**
+ * Executes a GET HTTP call to fetch the data from the URL specified.
+ * In development mode, it imports the file directly.
+ * @param url - API URL or file path if present locally.
+ * @returns promise - Promise with data on successful execution, or error in case of request failure.
+ */
+export const getDataFromAPI = (url) =>
+  new Promise((res, rej) => {
+    /* Since CRA webpack-dev-server is configured by default to return index.html as fallback 
+    for dot-notation paths - importing the Mock Data if running in Dev mode is an alternative. */
+    if (process.env.NODE_ENV.toLowerCase() === 'development') {
+      const CardsData = require('../static/mock_data.json');
+      res(CardsData);
+      return;
+    }
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => res(data))
+      .catch((err) => rej(err));
+  });

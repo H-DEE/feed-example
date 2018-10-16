@@ -10,14 +10,30 @@ import {
   DEFAULT_SEARCH_STR,
   SORT_OPTIONS,
   DEFAULT_SORT,
+  MOCK_DATA_URL
 } from "../../constants";
 import {
   customSort,
+  getDataFromAPI,
 } from "../../utils";
-import CardsData from '../../static/mock_data.json';
 import './Feed.scss';
 
 class Feed extends Component {
+  state = {
+    cardsData: [],
+  }
+  
+  async componentDidMount() {
+    try {
+      const cardsData = await getDataFromAPI(MOCK_DATA_URL);
+      this.setState({
+        cardsData
+      });
+    } catch (err) {
+      console.err('Mock Data GET request failed', err);
+    }
+  }
+
   /**
    * Get a filtered list of cards based on search string and sort type specified
    * @param seachStr - Search string passed as part of route params. Default DEFAULT_SEARCH_STR
@@ -25,7 +41,7 @@ class Feed extends Component {
    * @returns arr - List of cards after search and sort filters applied and sliced as per CARDS_PER_PAGE value
    */
   getFilteredCards(searchStr = DEFAULT_SEARCH_STR, sortBy = DEFAULT_SORT) {
-    const filteredItems = CardsData.filter(
+    const filteredItems = this.state.cardsData.filter(
       obj =>
         obj.name.toLowerCase().includes(searchStr.toLowerCase()) ||
         obj.description.toLowerCase().includes(searchStr.toLowerCase())
