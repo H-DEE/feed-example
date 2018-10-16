@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Feed from './containers/Feed';
 import './App.scss';
+
+// const baseName = process.env.NODE_ENV === 'development' ? '/' : '/feed-example';
 
 const App = () => {
   return (
