@@ -81,8 +81,8 @@ class Feed extends Component {
 
     return (
       <main role="main" className="feed-container">
-        <h1>Feed</h1>
-        <div className="filter-wrapper">
+        <header className="flexi-header">
+          <h1>Feed</h1>
           <Search
             searchStr={searchStr}
             setSearchStr={str => this.setSearchStr(str)}
@@ -92,7 +92,7 @@ class Feed extends Component {
             sortOptions={SORT_OPTIONS}
             setSortConfig={config => this.setSortConfig(config)}
           />
-        </div>
+        </header>
         <section className="cards-container">
           {filteredData.map((card, i) => (
             <FeedCard key={i} cardDetails={card} />

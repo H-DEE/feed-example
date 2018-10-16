@@ -6,14 +6,16 @@ import './Search.scss';
 const Search = ({ searchStr, setSearchStr }) => {
   return (
     <div className="search-wrapper">
-      <input
-        type="text"
-        name="search"
-        className="search-bar"
-        placeholder="Filter items..."
-        value={searchStr}
-        onChange={(e) => setSearchStr(e.target.value)}
-      />
+      <div className="search-box">
+        <input
+          type="text"
+          name="search"
+          className="search-bar"
+          placeholder="Filter items..."
+          value={searchStr}
+          onChange={(e) => setSearchStr(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

@@ -3,9 +3,12 @@
 .sort-wrapper {
   display: flex;
   align-items: center;
-  min-width: 180px;
-  width: 25%;
+  width: 50%;
   justify-content: flex-end;
+
+  @include media(mobile down) {
+    width: 100%;
+  }
 
   .label {
     padding-right: 0.5rem;
