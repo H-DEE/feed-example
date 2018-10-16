@@ -1,3 +1,5 @@
+@import 'core.scss';
+
 /* Using border-box across */
 * {
   box-sizing: border-box;
@@ -11,7 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #eee;
+  background: $app-bg-body;
 }
 
 code {
@@ -22,7 +24,7 @@ code {
 h1, h2, h3, h4 {
   margin: 0;
   padding: 1rem 0;
-  color: #222;
+  color: $app-text-primary;
 }
 
 h1 {
@@ -38,7 +40,7 @@ h3 {
 }
 
 /* Default font-size to scale other elements from for tablet/mobile devices */
-@media (max-width: 960px) {
+@include media(tablet down) {
   html {
     font-size: 14px;
   }
