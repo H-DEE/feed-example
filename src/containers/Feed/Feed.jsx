@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Search from '../../components/Search';
 import Sort from "../../components/Sort";
 import FeedCard from "../../components/FeedCard";
@@ -11,84 +12,62 @@ import {
   DEFAULT_SORT,
 } from "../../constants";
 import {
-  updateLocalStorage,
-  fetchFromLocalStorage,
   customSort,
 } from "../../utils";
 import CardsData from '../../static/mock_data.json';
 import './Feed.scss';
 
 class Feed extends Component {
-  state = {
-    searchStr: DEFAULT_SEARCH_STR,
-    sort: DEFAULT_SORT
-  };
-
-  componentDidMount() {
-    const cachedState = fetchFromLocalStorage();
-    if (cachedState) {
-      this.setState(cachedState);
-    }
-  }
-
   /**
    * Get a filtered list of cards based on search string and sort type specified
+   * @param seachStr - Search string passed as part of route params. Default DEFAULT_SEARCH_STR
+   * @param sortBy - Sort method passed as part of route params. Default DEFAULT_SORT
    * @returns arr - List of cards after search and sort filters applied and sliced as per CARDS_PER_PAGE value
    */
-  getFilteredCards() {
+  getFilteredCards(searchStr = DEFAULT_SEARCH_STR, sortBy = DEFAULT_SORT) {
     const filteredItems = CardsData.filter(
       obj =>
-        obj.name.toLowerCase().includes(this.state.searchStr.toLowerCase()) ||
-        obj.description
-          .toLowerCase()
-          .includes(this.state.searchStr.toLowerCase())
+        obj.name.toLowerCase().includes(searchStr.toLowerCase()) ||
+        obj.description.toLowerCase().includes(searchStr.toLowerCase())
     );
 
-    return customSort(filteredItems, this.state.sort).slice(0, CARDS_PER_PAGE);
+    return customSort(filteredItems, sortBy).slice(0, CARDS_PER_PAGE);
   }
 
   /**
-   * Callback trigger to update state with new search string, and update localStorage as well
+   * Callback trigger to update route params with entered search string
    * @param str - Updated string
    * @returns null
    */
   setSearchStr(str) {
-    this.setState(
-      {
-        searchStr: str
-      },
-      () => updateLocalStorage(this.state)
-    );
+    const { sortBy } = this.props.match.params;
+    this.props.history.push(`/${sortBy || DEFAULT_SORT}/${str}`);
   }
 
   /**
-   * Callback trigger to update state with sort method selected, and update localStorage as well
+   * Callback trigger to update route params with selected sort method
    * @param sortConfig - sort selection
    * @returns null
    */
   setSortConfig(sortConfig) {
-    this.setState(
-      {
-        sort: sortConfig
-      },
-      () => updateLocalStorage(this.state)
-    );
+    const { searchStr } = this.props.match.params;
+    this.props.history.push(`/${sortConfig}/${searchStr || DEFAULT_SEARCH_STR}`);
   }
 
   render() {
-    const { searchStr, sort } = this.state;
-    const filteredData = this.getFilteredCards();
+    const { searchStr, sortBy } = this.props.match.params;
+    const filteredData = this.getFilteredCards(searchStr, sortBy);
 
     return (
       <main role="main" className="feed-container">
         <header className="flexi-header">
           <h1>Feed</h1>
           <Search
-            searchStr={searchStr}
+            searchStr={searchStr || DEFAULT_SEARCH_STR}
             setSearchStr={str => this.setSearchStr(str)}
           />
           <Sort
-            sort={sort}
+            sort={sortBy || DEFAULT_SORT}
             sortOptions={SORT_OPTIONS}
             setSortConfig={config => this.setSortConfig(config)}
           />
@@ -106,5 +85,10 @@ class Feed extends Component {
     );
   }
 }
+
+Feed.propTypes = {
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 export default Feed;
