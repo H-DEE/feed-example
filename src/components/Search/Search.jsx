@@ -1,28 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { FeedContext } from '../../containers/Feed/Feed.context';
 
 import './Search.scss';
 
-const Search = ({ searchStr, setSearchStr }) => {
-  return (
-    <div className="search-wrapper">
-      <div className="search-box">
-        <input
-          type="text"
-          name="search"
-          className="search-bar"
-          placeholder="Filter items..."
-          value={searchStr}
-          onChange={(e) => setSearchStr(e.target.value)}
-        />
+const Search = () => (
+  <FeedContext.Consumer>
+    {({ searchStr, setSearchStr }) => (
+      <div className="search-wrapper">
+        <div className="search-box">
+          <input
+            type="text"
+            name="search"
+            className="search-bar"
+            placeholder="Filter items..."
+            value={searchStr}
+            onChange={(e) => setSearchStr(e.target.value)}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
-
-Search.propTypes = {
-  searchStr: PropTypes.string,
-  setSearchStr: PropTypes.func.isRequired,
-};
+    )}
+  </FeedContext.Consumer>
+);
 
 export default Search;
