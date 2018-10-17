@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Search from '../../components/Search';
 import Sort from "../../components/Sort";
 import FeedCard from "../../components/FeedCard";
-import FeedTable from "../../components/FeedTable";
+// import FeedTable from "../../components/FeedTable";
+import FlexTable from "../../components/FlexTable";
 
 import {
   CARDS_PER_PAGE,
@@ -30,7 +31,7 @@ class Feed extends Component {
         cardsData
       });
     } catch (err) {
-      console.err('Mock Data GET request failed', err);
+      console.error('Mock Data GET request failed', err);
     }
   }
 
@@ -94,8 +95,13 @@ class Feed extends Component {
           ))}
         </section>
         <h2>Cards Table</h2>
+        {/* Scrollable Table
         <section>
           <FeedTable data={filteredData} />
+        </section> 
+        */}
+        <section>
+          <FlexTable data={filteredData} />
         </section>
       </main>
     );
